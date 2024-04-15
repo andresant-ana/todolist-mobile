@@ -8,11 +8,19 @@ type DetailsSreenRouteProp = RouteProp<RootStackParamList, 'Details'>;
 export default function Details() {
   const router = useRoute<DetailsSreenRouteProp>();
 
+  const { taskDetails } = router.params;
+
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Details</Text>
-        <Text style={styles.subtitle}>Showing details for user {router.params.name}.</Text>
+        <Text style={styles.title}>Título:</Text>
+        <Text style={styles.info}>{taskDetails.title}</Text>
+        <Text style={styles.title}>Local:</Text>
+        <Text style={styles.info}>{taskDetails.location}</Text>
+        <Text style={styles.title}>Anotações:</Text>
+        <Text style={styles.info}>{taskDetails.notes}</Text>
+        <Text style={styles.title}>Completada:</Text>
+        <Text style={styles.info}>{taskDetails.completed ? 'Sim' : 'Não'}</Text>
       </View>
     </View>
   );
@@ -22,18 +30,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
+    backgroundColor: '#000',
   },
   main: {
-    flex: 1,
-    maxWidth: 960,
     marginHorizontal: 'auto',
+    justifyContent: 'center',
+    backgroundColor: '#f9f9f9',
+    padding: 16,
+    borderRadius: 15,
   },
   title: {
-    fontSize: 64,
+    fontSize: 24,
     fontWeight: 'bold',
   },
-  subtitle: {
-    fontSize: 36,
-    color: '#38434D',
+  info: {
+    fontSize: 18,
+    marginBottom: 16,
   },
 });

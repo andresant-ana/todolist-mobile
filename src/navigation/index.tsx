@@ -17,20 +17,11 @@ export default function RootStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Overview">
-        <Stack.Screen name="Overview" component={Overview} />
+        <Stack.Screen name="Overview" component={Overview} options={{headerShown:false}}/>
         <Stack.Screen
           name="Details"
           component={Details}
-          options={({ navigation }) => ({
-            headerLeft: () => (
-              <View style={styles.backButton}>
-                <Feather name="chevron-left" size={16} color="#007AFF" />
-                <Text style={styles.backButtonText} onPress={navigation.goBack}>
-                  Back
-                </Text>
-              </View>
-            ),
-          })}
+          options={{ headerTitle: 'Informações da Tarefa' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
