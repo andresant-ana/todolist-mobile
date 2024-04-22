@@ -21,28 +21,24 @@ export default function Overview() {
 
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  useEffect (() => {
+  useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch('https://run.mocky.io/v3/363e3fc2-b386-4464-a7d9-ff50dcdb8093');
+        const response = await fetch('http://192.168.15.135:8080/tasks');
         const json = await response.json();
 
         setTasks(json);
-
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchTasks();
-  
-  }, []);
+  }, [setTasks]);
 
   const completeTask = (taskId: number) => {
-    setTasks(prevTasks =>
-      prevTasks.map(task =>
-        task.id === taskId ? { ...task, completed: !task.completed } : task
-      )
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task.id === taskId ? { ...task, completed: !task.completed } : task))
     );
   };
 
@@ -52,7 +48,7 @@ export default function Overview() {
         <Text style={styles.titleTasks}>TAREFAS</Text>
       </View>
       <View style={styles.main}>
-      <FlatList
+        <FlatList
           data={tasks}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
@@ -64,7 +60,8 @@ export default function Overview() {
                 <MaterialIcons
                   name={item.completed ? 'check-box' : 'check-box-outline-blank'}
                   size={24}
-                  color={item.completed ? 'black' : 'black'}/>
+                  color={item.completed ? 'black' : 'black'}
+                />
               </TouchableOpacity>
             </TouchableOpacity>
           )}
